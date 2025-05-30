@@ -1,0 +1,16 @@
+function Footer() {
+  // Returned JSX
+  return (
+    <footer className="text-[1.2rem] p-10 bg-gray-900 text-white">
+      <div>
+        Built by VSBroN as a practice project
+        <br />
+        This project is available on GitHub
+        <br />
+        &copy;{new Date().getFullYear()}. All rights reserved
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;

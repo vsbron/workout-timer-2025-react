@@ -1,1 +1,41 @@
-@import "tailwindcss";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css";
+@import "tailwindcss/utilities.css";
+
+:root {
+  --dark-bg: #111827;
+  --dark-cards: #1f2937;
+  --dark-accent: #a855f7;
+  --dark-highlight: #14b8a6;
+  --light-bg: #f3f4f6;
+  --light-cards: #fff;
+  --light-accent: #6366f1;
+  --light-highlight: #2563eb;
+}
+::selection {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  scrollbar-color: var(--color-) var(--color-);
+  scroll-behavior: smooth;
+}
+
+body {
+  font: 400 1.8rem/1.3 "Open Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3rem;
+}
