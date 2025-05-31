@@ -2,6 +2,8 @@
 @import "tailwindcss/preflight.css";
 @import "tailwindcss/utilities.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --dark-bg: #111827;
   --dark-cards: #1f2937;

@@ -1,14 +1,14 @@
 import Container from "@/ui/Container";
 
-function Timer() {
+function Controls() {
   // Returned JSX
   return (
     <section>
       <Container>
-        <h2>Timer</h2>
+        <h2>Controls</h2>
       </Container>
     </section>
   );
 }
 
-export default Timer;
+export default Controls;
