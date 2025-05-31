@@ -1,5 +1,6 @@
 import Button from "@/ui/Button";
 import Container from "@/ui/Container";
+import { PauseIcon, PlayIcon, StopIcon } from "@heroicons/react/16/solid";
 
 function Controls() {
   // Returned JSX
@@ -7,10 +8,15 @@ function Controls() {
     <section>
       <Container>
         <div className="flex justify-center gap-10">
-          <Button>Start</Button>
-          <Button>Pause</Button>
-          <Button>Stop</Button>
-          <Button>Reset</Button>
+          <Button>
+            <PlayIcon className="fill-inherit w-15 h-15" />
+          </Button>
+          <Button>
+            <PauseIcon className="fill-inherit w-15 h-15" />
+          </Button>
+          <Button>
+            <StopIcon className="fill-inherit w-15 h-15" />
+          </Button>
         </div>
       </Container>
     </section>
