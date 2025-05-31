@@ -1,6 +1,7 @@
+import { PauseIcon, PlayIcon, StopIcon } from "@heroicons/react/16/solid";
+
 import Button from "@/ui/Button";
 import Container from "@/ui/Container";
-import { PauseIcon, PlayIcon, StopIcon } from "@heroicons/react/16/solid";
 
 function Controls() {
   // Returned JSX
