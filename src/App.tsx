@@ -7,6 +7,7 @@ import Options from "@/components/Options";
 import Footer from "@/ui/Footer";
 import Header from "@/ui/Header";
 import Main from "@/ui/Main";
+import { TimerProvider } from "./context/TimerContext";
 
 function App() {
   // Getting the dark theme state from the context
@@ -22,9 +23,11 @@ function App() {
     <>
       <Header />
       <Main>
-        <Timer />
-        <Controls />
-        <Options />
+        <TimerProvider>
+          <Timer />
+          <Controls />
+          <Options />
+        </TimerProvider>
       </Main>
       <Footer />
     </>
