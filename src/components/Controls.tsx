@@ -6,15 +6,15 @@ function Controls() {
   // Returned JSX
   return (
     <section>
-      <Container>
+      <Container className="flex flex-col gap-2">
         <div className="flex justify-center gap-10">
-          <Button>
+          <Button big={true}>
             <PlayIcon className="fill-inherit w-15 h-15" />
           </Button>
-          <Button>
+          <Button big={true}>
             <PauseIcon className="fill-inherit w-15 h-15" />
           </Button>
-          <Button>
+          <Button big={true}>
             <StopIcon className="fill-inherit w-15 h-15" />
           </Button>
         </div>
