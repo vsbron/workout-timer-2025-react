@@ -20,7 +20,7 @@ interface ITimerContext {
 const INITIAL_EXERCISE = 30;
 const INITIAL_BREAK = 15;
 
-// Create Context with initial timer state
+// Create Context with undefined
 const TimerContext = createContext<ITimerContext | undefined>(undefined);
 
 // TimerProvider component that will wrap the timer & controls
@@ -52,7 +52,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Custom hook to use the App context
+// Custom hook to use the Context API
 export const useTimerContext = (): ITimerContext => {
   // Getting the data from the context
   const context = useContext(TimerContext);

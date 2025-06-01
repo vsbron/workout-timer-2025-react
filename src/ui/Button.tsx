@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 
-function Button({
-  children,
-  big = false,
-  onClick,
-}: {
+// Component prop types
+type ButtonProps = {
   children: ReactNode;
   big?: boolean;
   onClick?: () => void;
-}) {
+  disabled?: boolean;
+};
+
+function Button({ children, big = false, onClick, disabled }: ButtonProps) {
   // Returned JSX
   return (
     <button
@@ -19,6 +19,7 @@ function Button({
             : "px-8 py-3 border-b-2 active:pt-[.85rem] active:pb-[.65rem]"
         }`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

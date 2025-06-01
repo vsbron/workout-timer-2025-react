@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Custom hook to use the App context
+// Custom hook to use the Context API
 export const useThemeContext = (): IThemeContext => {
   // Getting the data from the context
   const context = useContext(ThemeContext);
