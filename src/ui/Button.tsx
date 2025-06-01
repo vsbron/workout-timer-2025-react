@@ -3,9 +3,11 @@ import type { ReactNode } from "react";
 function Button({
   children,
   big = false,
+  onClick,
 }: {
   children: ReactNode;
   big?: boolean;
+  onClick?: () => void;
 }) {
   // Returned JSX
   return (
@@ -16,6 +18,7 @@ function Button({
             ? "px-10 py-5 border-b-3"
             : "px-8 py-3 border-b-2 active:pt-[.85rem] active:pb-[.65rem]"
         }`}
+      onClick={onClick}
     >
       {children}
     </button>
