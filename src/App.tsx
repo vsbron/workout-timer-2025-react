@@ -1,13 +1,14 @@
 import { useEffect } from "react";
+
+import { TimerProvider } from "@/context/TimerContext";
 import { useThemeContext } from "@/context/ThemeContext";
 
+import Header from "@/ui/Header";
+import Main from "@/ui/Main";
+import Footer from "@/ui/Footer";
 import Timer from "@/components/Timer";
 import Controls from "@/components/Controls";
 import Options from "@/components/Options";
-import Footer from "@/ui/Footer";
-import Header from "@/ui/Header";
-import Main from "@/ui/Main";
-import { TimerProvider } from "./context/TimerContext";
 
 function App() {
   // Getting the dark theme state from the context
@@ -20,7 +21,7 @@ function App() {
 
   // Returned JSX
   return (
-    <>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100vh]">
       <Header />
       <Main>
         <TimerProvider>
@@ -30,7 +31,7 @@ function App() {
         </TimerProvider>
       </Main>
       <Footer />
-    </>
+    </div>
   );
 }
 
