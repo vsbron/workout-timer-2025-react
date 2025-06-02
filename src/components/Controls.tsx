@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useTimerContext } from "@/context/TimerContext";
 
+import Settings from "@/components/Settings";
 import Button from "@/ui/Button";
 import Container from "@/ui/Container";
 
@@ -23,7 +24,7 @@ function Controls() {
           <Button onClick={resetTimer}>Reset</Button>
           <Button onClick={toggleSettings}>Settings</Button>
         </div>
-        {areSettingsOpen && <div>Timer options</div>}
+        {areSettingsOpen && <Settings />}
       </Container>
     </section>
   );
