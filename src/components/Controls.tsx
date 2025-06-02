@@ -1,48 +1,29 @@
-import { useRef } from "react";
-import { PauseIcon, PlayIcon, StopIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
+
+import { useTimerContext } from "@/context/TimerContext";
 
 import Button from "@/ui/Button";
 import Container from "@/ui/Container";
 
-import Start from "@/assets/sounds/start.mp3";
-import Pause from "@/assets/sounds/pause.mp3";
-import Stop from "@/assets/sounds/beep.mp3";
-
 function Controls() {
-  // Getting references to the audio files
-  const startRef = useRef(new Audio(Start));
-  const pauseRef = useRef(new Audio(Pause));
-  const stopRef = useRef(new Audio(Stop));
+  // Getting the reset function from the Context API
+  const { resetTimer } = useTimerContext();
 
-  // Click handlers for buttons (temp)
-  const playSound = () => {
-    startRef.current.currentTime = 0.2;
-    startRef.current.play();
-  };
-  const pauseSound = () => {
-    pauseRef.current.currentTime = 0.2;
-    pauseRef.current.play();
-  };
-  const stopSound = () => {
-    stopRef.current.currentTime = 0;
-    stopRef.current.play();
+  // Setting the state for the settings bar visibility and creating toggle function
+  const [areSettingsOpen, setAreSettingsOpen] = useState<boolean>(false);
+  const toggleSettings = () => {
+    setAreSettingsOpen((areOpen) => !areOpen);
   };
 
   // Returned JSX
   return (
     <section>
-      <Container className="flex flex-col gap-2">
+      <Container>
         <div className="flex justify-center gap-10">
-          <Button big={true} onClick={playSound}>
-            <PlayIcon className="fill-inherit w-15 h-15" />
-          </Button>
-          <Button big={true} onClick={pauseSound}>
-            <PauseIcon className="fill-inherit w-15 h-15" />
-          </Button>
-          <Button big={true} onClick={stopSound}>
-            <StopIcon className="fill-inherit w-15 h-15" />
-          </Button>
+          <Button onClick={resetTimer}>Reset</Button>
+          <Button onClick={toggleSettings}>Settings</Button>
         </div>
+        {areSettingsOpen && <div>Timer options</div>}
       </Container>
     </section>
   );
