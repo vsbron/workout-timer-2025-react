@@ -4,7 +4,10 @@ import { useTimerContext } from "@/context/TimerContext";
 
 import Button from "@/ui/Button";
 
-function Settings() {
+// Component prop types
+type SettingsProps = { settingsClose: () => void };
+
+function Settings({ settingsClose }: SettingsProps) {
   // Getting the state values and setters from Context API
   const {
     exerciseLength,
@@ -16,6 +19,7 @@ function Settings() {
     resetTimer,
   } = useTimerContext();
 
+  // Setting the states for the settings inputs
   const [newExerciseLength, setNewExerciseLength] =
     useState<number>(exerciseLength);
   const [newBreakLength, setNewBreakLength] = useState<number>(breakLength);
@@ -58,7 +62,14 @@ function Settings() {
           />
         </div>
       </div>
-      <Button onClick={submitSettings}>Save & Reset</Button>
+      <div className="flex gap-6">
+        <Button size="small" onClick={settingsClose}>
+          Cancel
+        </Button>
+        <Button size="small" onClick={submitSettings}>
+          Save & Reset
+        </Button>
+      </div>
     </div>
   );
 }

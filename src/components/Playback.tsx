@@ -33,13 +33,13 @@ function Playback() {
     <section>
       <Container className="flex flex-col gap-2">
         <div className="flex justify-center gap-10">
-          <Button big={true} onClick={playSound}>
+          <Button size="big" onClick={playSound}>
             <PlayIcon className="fill-inherit w-15 h-15" />
           </Button>
-          <Button big={true} onClick={pauseSound}>
+          <Button size="big" onClick={pauseSound}>
             <PauseIcon className="fill-inherit w-15 h-15" />
           </Button>
-          <Button big={true} onClick={stopSound}>
+          <Button size="big" onClick={stopSound}>
             <StopIcon className="fill-inherit w-15 h-15" />
           </Button>
         </div>

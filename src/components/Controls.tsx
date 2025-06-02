@@ -10,11 +10,8 @@ function Controls() {
   // Getting the reset function from the Context API
   const { resetTimer } = useTimerContext();
 
-  // Setting the state for the settings bar visibility and creating toggle function
+  // Setting the state for the settings bar visibility
   const [areSettingsOpen, setAreSettingsOpen] = useState<boolean>(false);
-  const toggleSettings = () => {
-    setAreSettingsOpen((areOpen) => !areOpen);
-  };
 
   // Returned JSX
   return (
@@ -22,9 +19,11 @@ function Controls() {
       <Container>
         <div className="flex justify-center gap-10">
           <Button onClick={resetTimer}>Reset</Button>
-          <Button onClick={toggleSettings}>Settings</Button>
+          <Button onClick={() => setAreSettingsOpen(true)}>Settings</Button>
         </div>
-        {areSettingsOpen && <Settings />}
+        {areSettingsOpen && (
+          <Settings settingsClose={() => setAreSettingsOpen(false)} />
+        )}
       </Container>
     </section>
   );
