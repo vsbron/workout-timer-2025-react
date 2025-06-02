@@ -8,7 +8,7 @@ import {
 } from "react";
 
 // Types of available phases
-type phases = "idle" | "exercise" | "break";
+type phases = "Idle" | "Exercise" | "Break";
 
 // Interface for the context
 interface ITimerContext {
@@ -27,7 +27,7 @@ interface ITimerContext {
 const INITIAL_EXERCISE = 30;
 const INITIAL_BREAK = 15;
 const INITIAL_ROUNDS = 3;
-const INITIAL_STATE = "idle";
+const INITIAL_STATE = "Idle";
 
 // Create Context with undefined
 const TimerContext = createContext<ITimerContext | undefined>(undefined);
