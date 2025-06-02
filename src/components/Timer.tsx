@@ -2,6 +2,7 @@ import { useTimerContext } from "@/context/TimerContext";
 import Container from "@/ui/Container";
 
 function Timer() {
+  // Getting the state values from Context API
   const { exerciseLength, breakLength, roundsNum } = useTimerContext();
 
   // Returned JSX
