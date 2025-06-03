@@ -10,23 +10,25 @@ import {
 // Types of available phases
 type phases = "Idle" | "Exercise" | "Break";
 
-// Interface for the context
-interface ITimerContext {
-  exerciseLength: number;
-  breakLength: number;
-  roundsNum: number;
+interface ITimerRuntime {
   currentPhase: phases;
   currentTime: number;
   currentRound: number;
   isPaused: boolean;
-  setExerciseLength: Dispatch<SetStateAction<number>>;
-  setBreakLength: Dispatch<SetStateAction<number>>;
-  setRoundsNum: Dispatch<SetStateAction<number>>;
   setCurrentPhase: Dispatch<SetStateAction<phases>>;
   setCurrentTime: Dispatch<SetStateAction<number>>;
   setCurrentRound: Dispatch<SetStateAction<number>>;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
   resetTimer: () => void;
+}
+
+interface ITimerSettings {
+  exerciseLength: number;
+  breakLength: number;
+  roundsNum: number;
+  setExerciseLength: Dispatch<SetStateAction<number>>;
+  setBreakLength: Dispatch<SetStateAction<number>>;
+  setRoundsNum: Dispatch<SetStateAction<number>>;
 }
 
 // Initial values
@@ -39,7 +41,10 @@ const STARTING_TIME = 0;
 const STARTING_ROUND = 1;
 
 // Create Context with undefined
-const TimerContext = createContext<ITimerContext | undefined>(undefined);
+const TimerRuntimeContext = createContext<ITimerRuntime | undefined>(undefined);
+const TimerSettingsContext = createContext<ITimerSettings | undefined>(
+  undefined
+);
 
 // TimerProvider component that will wrap the timer & controls
 export const TimerProvider = ({ children }: { children: ReactNode }) => {
@@ -66,58 +71,66 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   // Returned JSX
   return (
-    <TimerContext.Provider
+    <TimerSettingsContext.Provider
       value={{
         exerciseLength,
         breakLength,
         roundsNum,
-        currentPhase,
-        currentTime,
-        currentRound,
-        isPaused,
         setExerciseLength,
         setBreakLength,
         setRoundsNum,
-        setCurrentPhase,
-        setCurrentTime,
-        setCurrentRound,
-        setIsPaused,
-        resetTimer,
       }}
     >
-      {children}
-    </TimerContext.Provider>
+      <TimerRuntimeContext.Provider
+        value={{
+          currentPhase,
+          currentTime,
+          currentRound,
+          isPaused,
+          setCurrentPhase,
+          setCurrentTime,
+          setCurrentRound,
+          setIsPaused,
+          resetTimer,
+        }}
+      >
+        {children}
+      </TimerRuntimeContext.Provider>
+    </TimerSettingsContext.Provider>
   );
 };
 
 // Custom hook to use the Context API
-export const useTimerContext = (): ITimerContext => {
+export const useTimerContext = () => {
   // Getting the data from the context
-  const context = useContext(TimerContext);
+  const context1 = useContext(TimerSettingsContext);
+  const context2 = useContext(TimerRuntimeContext);
 
   // Error if tried to use outside of Context scope
-  if (!context) {
+  if (!context1 || !context2) {
     throw new Error("useTimerContext must be used within a TimerProvider");
   }
 
-  // Getting the values out of context
+  // Getting the values out of contexts
   const {
     exerciseLength,
     breakLength,
     roundsNum,
+    setExerciseLength,
+    setBreakLength,
+    setRoundsNum,
+  } = context1;
+  const {
     currentPhase,
     currentTime,
     currentRound,
     isPaused,
-    setExerciseLength,
-    setBreakLength,
-    setRoundsNum,
     setCurrentPhase,
     setCurrentTime,
     setCurrentRound,
     setIsPaused,
     resetTimer,
-  } = context;
+  } = context2;
 
   // Return the values
   return {
