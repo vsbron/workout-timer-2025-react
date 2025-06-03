@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTimerContext } from "@/context/TimerContext";
 
 import Button from "@/ui/Button";
+import { FormGroup, FormInput, FormLabel } from "@/ui/Form";
 
 // Component prop types
 type SettingsProps = { settingsClose: () => void };
@@ -35,36 +36,34 @@ function Settings({ settingsClose }: SettingsProps) {
 
   // Returned JSX
   return (
-    <div className="mt-4">
-      <div className="flex text-2xl">
-        <div>
-          <label>Exercise length (in seconds)</label>
-          <input
-            type="text"
+    <div className="flex flex-col gap-8">
+      <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
+      <div className="flex flex-col gap-4">
+        <FormGroup>
+          <FormLabel>Exercise length (in seconds)</FormLabel>
+          <FormInput
             onChange={(e) => setNewExerciseLength(Number(e.target.value))}
             value={newExerciseLength}
           />
-        </div>
-        <div>
-          <label>Break length (in seconds)</label>
-          <input
-            type="text"
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>Break length (in seconds)</FormLabel>
+          <FormInput
             onChange={(e) => setNewBreakLength(Number(e.target.value))}
             value={newBreakLength}
           />
-        </div>
-        <div>
-          <label>Number of rounds</label>
-          <input
-            type="text"
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>Number of rounds</FormLabel>
+          <FormInput
             onChange={(e) => setNewRoundsNum(Number(e.target.value))}
             value={newRoundsNum}
           />
-        </div>
+        </FormGroup>
       </div>
-      <div className="flex gap-6">
+      <div className="flex gap-6 justify-center">
         <Button size="small" onClick={settingsClose}>
-          Cancel
+          Close
         </Button>
         <Button size="small" onClick={submitSettings}>
           Save & Reset
