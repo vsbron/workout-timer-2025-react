@@ -8,10 +8,16 @@ import Container from "@/ui/Container";
 
 function Controls() {
   // Getting the reset function from the Context API
-  const { resetTimer } = useTimerContext();
+  const { resetTimer, setIsPaused } = useTimerContext();
 
   // Setting the state for the settings bar visibility
   const [areSettingsOpen, setAreSettingsOpen] = useState<boolean>(false);
+
+  // Click handler for opening and closing setting (pauses the timer in both scenarios)
+  const settingsHandler = () => {
+    setAreSettingsOpen((areOpen) => !areOpen);
+    setIsPaused(true);
+  };
 
   // Returned JSX
   return (
@@ -19,11 +25,9 @@ function Controls() {
       <Container>
         <div className="flex justify-center gap-10">
           <Button onClick={resetTimer}>Reset</Button>
-          <Button onClick={() => setAreSettingsOpen(true)}>Settings</Button>
+          <Button onClick={settingsHandler}>Settings</Button>
         </div>
-        {areSettingsOpen && (
-          <Settings settingsClose={() => setAreSettingsOpen(false)} />
-        )}
+        {areSettingsOpen && <Settings settingsClose={settingsHandler} />}
       </Container>
     </section>
   );
