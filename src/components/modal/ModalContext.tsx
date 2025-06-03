@@ -3,8 +3,7 @@ import { createContext, useContext } from "react";
 // Context structure
 interface ModalContextType {
   isOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
+  toggleModal: () => void;
 }
 
 // Creating context

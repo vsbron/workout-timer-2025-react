@@ -1,23 +1,17 @@
-import { useState } from "react";
-
 import { useTimerContext } from "@/context/TimerContext";
 
 import Settings from "@/components/Settings";
+import useModal from "@/components/modal/ModalContext";
+import Modal from "@/components/modal/ModalParent";
 import Button from "@/ui/Button";
 import Container from "@/ui/Container";
 
 function Controls() {
   // Getting the reset function from the Context API
-  const { resetTimer, setIsPaused } = useTimerContext();
+  const { resetTimer } = useTimerContext();
 
-  // Setting the state for the settings bar visibility
-  const [areSettingsOpen, setAreSettingsOpen] = useState<boolean>(false);
-
-  // Click handler for opening and closing setting (pauses the timer in both scenarios)
-  const settingsHandler = () => {
-    setAreSettingsOpen((areOpen) => !areOpen);
-    setIsPaused(true);
-  };
+  // Getting the modal toggling function from Modal Context
+  const { toggleModal } = useModal();
 
   // Returned JSX
   return (
@@ -25,9 +19,14 @@ function Controls() {
       <Container>
         <div className="flex justify-center gap-10">
           <Button onClick={resetTimer}>Reset</Button>
-          <Button onClick={settingsHandler}>Settings</Button>
+          <Modal.Trigger>
+            <Button>Settings</Button>
+          </Modal.Trigger>
+          <Modal.Overlay />
+          <Modal.Content>
+            <Settings settingsClose={toggleModal} />
+          </Modal.Content>
         </div>
-        {areSettingsOpen && <Settings settingsClose={settingsHandler} />}
       </Container>
     </section>
   );

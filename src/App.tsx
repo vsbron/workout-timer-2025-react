@@ -9,6 +9,7 @@ import Footer from "@/ui/Footer";
 import Timer from "@/components/Timer";
 import Controls from "@/components/Controls";
 import Playback from "@/components/Playback";
+import Modal from "./components/modal/ModalParent";
 
 function App() {
   // Getting the dark theme state from the context
@@ -27,7 +28,9 @@ function App() {
         <TimerProvider>
           <Timer />
           <Playback />
-          <Controls />
+          <Modal>
+            <Controls />
+          </Modal>
         </TimerProvider>
       </Main>
       <Footer />

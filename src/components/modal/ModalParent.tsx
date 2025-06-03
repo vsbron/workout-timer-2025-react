@@ -1,19 +1,25 @@
-import { ReactNode, useState } from "react";
+import { useState, type ReactNode } from "react";
 
-import { Content, Overlay, Trigger } from "./ModalChildren";
-import { ModalContext } from "./ModalContext";
+import { useTimerContext } from "@/context/TimerContext";
+
+import { Content, Overlay, Trigger } from "@/components/modal/ModalChildren";
+import { ModalContext } from "@/components/modal/ModalContext";
 
 function Modal({ children }: { children: ReactNode }) {
   // Setting the stat for modal visibility
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // Function to change Modal's visibility
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const { setIsPaused } = useTimerContext();
+
+  // Toggle function that pauses the timer and shows/hides modal
+  const toggleModal = () => {
+    setIsPaused(true);
+    setIsOpen((open) => !open);
+  };
 
   // Returned JSX
   return (
-    <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+    <ModalContext.Provider value={{ isOpen, toggleModal }}>
       <div>{children}</div>
     </ModalContext.Provider>
   );
