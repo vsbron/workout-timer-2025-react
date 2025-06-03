@@ -16,10 +16,16 @@ interface ITimerContext {
   breakLength: number;
   roundsNum: number;
   currentPhase: phases;
+  currentTime: number;
+  currentRound: number;
+  isPaused: boolean;
   setExerciseLength: Dispatch<SetStateAction<number>>;
   setBreakLength: Dispatch<SetStateAction<number>>;
   setRoundsNum: Dispatch<SetStateAction<number>>;
   setCurrentPhase: Dispatch<SetStateAction<phases>>;
+  setCurrentTime: Dispatch<SetStateAction<number>>;
+  setCurrentRound: Dispatch<SetStateAction<number>>;
+  setIsPaused: Dispatch<SetStateAction<boolean>>;
   resetTimer: () => void;
 }
 
@@ -28,6 +34,9 @@ const INITIAL_EXERCISE = 30;
 const INITIAL_BREAK = 15;
 const INITIAL_ROUNDS = 3;
 const INITIAL_STATE = "Idle";
+const INITIAL_PAUSED = true;
+const STARTING_TIME = 0;
+const STARTING_ROUND = 1;
 
 // Create Context with undefined
 const TimerContext = createContext<ITimerContext | undefined>(undefined);
@@ -40,6 +49,9 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const [breakLength, setBreakLength] = useState<number>(INITIAL_BREAK);
   const [roundsNum, setRoundsNum] = useState<number>(INITIAL_ROUNDS);
   const [currentPhase, setCurrentPhase] = useState<phases>(INITIAL_STATE);
+  const [currentTime, setCurrentTime] = useState<number>(STARTING_TIME);
+  const [currentRound, setCurrentRound] = useState<number>(STARTING_ROUND);
+  const [isPaused, setIsPaused] = useState<boolean>(INITIAL_PAUSED);
 
   // Reset timer function that initiates all the times
   const resetTimer = () => {
@@ -47,6 +59,9 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     setBreakLength(INITIAL_BREAK);
     setRoundsNum(INITIAL_ROUNDS);
     setCurrentPhase(INITIAL_STATE);
+    setCurrentTime(STARTING_TIME);
+    setCurrentRound(STARTING_ROUND);
+    setIsPaused(true);
   };
 
   // Returned JSX
@@ -57,10 +72,16 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
         breakLength,
         roundsNum,
         currentPhase,
+        currentTime,
+        currentRound,
+        isPaused,
         setExerciseLength,
         setBreakLength,
         setRoundsNum,
         setCurrentPhase,
+        setCurrentTime,
+        setCurrentRound,
+        setIsPaused,
         resetTimer,
       }}
     >
@@ -85,10 +106,16 @@ export const useTimerContext = (): ITimerContext => {
     breakLength,
     roundsNum,
     currentPhase,
+    currentTime,
+    currentRound,
+    isPaused,
     setExerciseLength,
     setBreakLength,
     setRoundsNum,
     setCurrentPhase,
+    setCurrentTime,
+    setCurrentRound,
+    setIsPaused,
     resetTimer,
   } = context;
 
@@ -98,10 +125,16 @@ export const useTimerContext = (): ITimerContext => {
     breakLength,
     roundsNum,
     currentPhase,
+    currentTime,
+    currentRound,
+    isPaused,
     setExerciseLength,
     setBreakLength,
     setRoundsNum,
     setCurrentPhase,
+    setCurrentTime,
+    setCurrentRound,
+    setIsPaused,
     resetTimer,
   };
 };
