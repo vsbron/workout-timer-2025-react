@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
 import useModal from "@/components/modal/ModalContext";
-import styles from "@/components/modal/Modal.module.css";
 
 // Modal window
 export function Content({ children }: { children: ReactNode }) {
@@ -11,9 +10,12 @@ export function Content({ children }: { children: ReactNode }) {
   // Returned JSX
   return (
     isOpen && (
-      <div className={styles.modalContent}>
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto max-w-[60rem] bg-stone-50 p-[2rem] rounded-xl z-50">
         {children}
-        <div className={styles.modalClose} onClick={toggleModal}>
+        <div
+          className="cursor-pointer w-[1rem] h-[1rem] flex justify-center items-center text-[1.6rem] leading-[1] p-[1rem] absolute top-[1rem] right-[1rem]"
+          onClick={toggleModal}
+        >
           X
         </div>
       </div>
@@ -28,7 +30,12 @@ export function Overlay() {
 
   // Returned JSX
   return (
-    isOpen && <div className={styles.modalOverlay} onClick={toggleModal}></div>
+    isOpen && (
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-stone-950/50"
+        onClick={toggleModal}
+      ></div>
+    )
   );
 }
 
@@ -39,7 +46,7 @@ export function Trigger({ children }: { children: ReactNode }) {
 
   // Returned JSX
   return (
-    <div onClick={toggleModal} className={styles.modalTrigger}>
+    <div onClick={toggleModal} className="cursor-pointer">
       {children}
     </div>
   );
