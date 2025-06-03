@@ -19,6 +19,7 @@ interface ITimerRuntime {
   setCurrentTime: Dispatch<SetStateAction<number>>;
   setCurrentRound: Dispatch<SetStateAction<number>>;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
+  stopTimer: () => void;
   resetTimer: () => void;
 }
 
@@ -58,7 +59,13 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const [currentRound, setCurrentRound] = useState<number>(STARTING_ROUND);
   const [isPaused, setIsPaused] = useState<boolean>(INITIAL_PAUSED);
 
-  // Reset timer function that initiates all the times
+  // Reset timer function that initiates all the times/rounds
+  const stopTimer = () => {
+    setIsPaused(INITIAL_PAUSED);
+    setCurrentTime(STARTING_TIME);
+    setCurrentRound(STARTING_ROUND);
+  };
+
   const resetTimer = () => {
     setExerciseLength(INITIAL_EXERCISE);
     setBreakLength(INITIAL_BREAK);
@@ -66,7 +73,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     setCurrentPhase(INITIAL_STATE);
     setCurrentTime(STARTING_TIME);
     setCurrentRound(STARTING_ROUND);
-    setIsPaused(true);
+    setIsPaused(INITIAL_PAUSED);
   };
 
   // Returned JSX
@@ -91,6 +98,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
           setCurrentTime,
           setCurrentRound,
           setIsPaused,
+          stopTimer,
           resetTimer,
         }}
       >
@@ -129,6 +137,7 @@ export const useTimerContext = () => {
     setCurrentTime,
     setCurrentRound,
     setIsPaused,
+    stopTimer,
     resetTimer,
   } = context2;
 
@@ -148,6 +157,7 @@ export const useTimerContext = () => {
     setCurrentTime,
     setCurrentRound,
     setIsPaused,
+    stopTimer,
     resetTimer,
   };
 };
