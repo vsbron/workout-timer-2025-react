@@ -1,4 +1,13 @@
 import {
+  INITIAL_BREAK,
+  INITIAL_EXERCISE,
+  INITIAL_PAUSED,
+  INITIAL_ROUNDS,
+  INITIAL_STATE,
+  STARTING_ROUND,
+  STARTING_TIME,
+} from "@/lib/constants";
+import {
   createContext,
   useContext,
   useState,
@@ -31,15 +40,6 @@ interface ITimerSettings {
   setBreakLength: Dispatch<SetStateAction<number>>;
   setRoundsNum: Dispatch<SetStateAction<number>>;
 }
-
-// Initial values
-const INITIAL_EXERCISE = 30;
-const INITIAL_BREAK = 15;
-const INITIAL_ROUNDS = 3;
-const INITIAL_STATE = "Idle";
-const INITIAL_PAUSED = true;
-const STARTING_TIME = 0;
-const STARTING_ROUND = 1;
 
 // Create Context with undefined
 const TimerRuntimeContext = createContext<ITimerRuntime | undefined>(undefined);

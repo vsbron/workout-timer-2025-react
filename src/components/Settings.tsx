@@ -4,6 +4,11 @@ import { useTimerContext } from "@/context/TimerContext";
 
 import Button from "@/ui/Button";
 import { FormGroup, FormInput, FormLabel } from "@/ui/Form";
+import {
+  MAX_BREAK_LENGTH,
+  MAX_EXERCISE_LENGTH,
+  MAX_ROUNDS,
+} from "@/lib/constants";
 
 // Component prop types
 type SettingsProps = { settingsClose: () => void };
@@ -43,26 +48,32 @@ function Settings({ settingsClose }: SettingsProps) {
       <form onSubmit={(e) => submitSettings(e)} className="flex flex-col gap-8">
         <div className="flex flex-col gap-5">
           <FormGroup>
-            <FormLabel note={`Maximum 600 seconds`}>Exercise length</FormLabel>
+            <FormLabel note={`Maximum ${MAX_EXERCISE_LENGTH}} seconds`}>
+              Exercise length
+            </FormLabel>
             <FormInput
               onChange={setNewExerciseLength}
-              limit={600}
+              limit={MAX_EXERCISE_LENGTH}
               value={newExerciseLength}
             />
           </FormGroup>
           <FormGroup>
-            <FormLabel note={`Maximum 240 seconds`}>Break length</FormLabel>
+            <FormLabel note={`Maximum ${MAX_BREAK_LENGTH} seconds`}>
+              Break length
+            </FormLabel>
             <FormInput
               onChange={setNewBreakLength}
-              limit={240}
+              limit={MAX_BREAK_LENGTH}
               value={newBreakLength}
             />
           </FormGroup>
           <FormGroup>
-            <FormLabel note={`Maximum 5 rounds`}>Number of rounds</FormLabel>
+            <FormLabel note={`Maximum ${MAX_ROUNDS} rounds`}>
+              Number of rounds
+            </FormLabel>
             <FormInput
               onChange={setNewRoundsNum}
-              limit={5}
+              limit={MAX_ROUNDS}
               value={newRoundsNum}
             />
           </FormGroup>
