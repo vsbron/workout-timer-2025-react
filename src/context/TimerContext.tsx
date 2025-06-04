@@ -10,6 +10,8 @@ import {
 import {
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
   type Dispatch,
   type ReactNode,
@@ -28,6 +30,7 @@ interface ITimerRuntime {
   setCurrentTime: Dispatch<SetStateAction<number>>;
   setCurrentRound: Dispatch<SetStateAction<number>>;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
+  startTimer: () => void;
   stopTimer: () => void;
   resetTimer: () => void;
 }
@@ -59,13 +62,67 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const [currentRound, setCurrentRound] = useState<number>(STARTING_ROUND);
   const [isPaused, setIsPaused] = useState<boolean>(INITIAL_PAUSED);
 
-  // Reset timer function that initiates all the times/rounds
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (!isPaused && currentTime > 0) {
+      intervalRef.current = setInterval(() => {
+        setCurrentTime((time) => time - 1);
+      }, 1000);
+    }
+
+    if (currentTime === 0 && !isPaused) {
+      // Timer reached zero, switch phase
+      clearInterval(intervalRef.current!);
+
+      if (currentPhase === "Exercise") {
+        setCurrentPhase("Break");
+        setCurrentTime(breakLength);
+      } else if (currentPhase === "Break") {
+        if (currentRound < roundsNum) {
+          setCurrentRound((r) => r + 1);
+          setCurrentPhase("Exercise");
+          setCurrentTime(exerciseLength);
+        } else {
+          // Finished all rounds
+          setCurrentPhase("Idle");
+          setIsPaused(true);
+          setCurrentTime(0);
+          setCurrentRound(1);
+        }
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [
+    isPaused,
+    currentTime,
+    currentPhase,
+    currentRound,
+    roundsNum,
+    exerciseLength,
+    breakLength,
+  ]);
+
+  const startTimer = () => {
+    if (currentPhase === "Idle") {
+      setCurrentPhase("Exercise");
+      setCurrentTime(exerciseLength);
+    }
+    setIsPaused(false);
+  };
+
+  // Stop timer function that gets it to zero, but keeps the current lengths
   const stopTimer = () => {
     setIsPaused(INITIAL_PAUSED);
     setCurrentTime(STARTING_TIME);
     setCurrentRound(STARTING_ROUND);
+    setCurrentPhase("Idle");
   };
 
+  // Reset timer function that initiates all the times/rounds
   const resetTimer = () => {
     setExerciseLength(INITIAL_EXERCISE);
     setBreakLength(INITIAL_BREAK);
@@ -98,6 +155,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
           setCurrentTime,
           setCurrentRound,
           setIsPaused,
+          startTimer,
           stopTimer,
           resetTimer,
         }}
@@ -137,6 +195,7 @@ export const useTimerContext = () => {
     setCurrentTime,
     setCurrentRound,
     setIsPaused,
+    startTimer,
     stopTimer,
     resetTimer,
   } = context2;
@@ -157,6 +216,7 @@ export const useTimerContext = () => {
     setCurrentTime,
     setCurrentRound,
     setIsPaused,
+    startTimer,
     stopTimer,
     resetTimer,
   };

@@ -12,7 +12,7 @@ import Stop from "@/assets/sounds/beep.mp3";
 
 function Playback() {
   // Getting the functions function from the Context API
-  const { setIsPaused, stopTimer } = useTimerContext();
+  const { setIsPaused, stopTimer, startTimer } = useTimerContext();
 
   // Getting references to the audio files
   const startRef = useRef(new Audio(Start));
@@ -21,7 +21,7 @@ function Playback() {
 
   // Click handlers for buttons
   const playButtonHandler = () => {
-    setIsPaused(false);
+    startTimer();
     startRef.current.currentTime = 0.2;
     startRef.current.play();
   };
