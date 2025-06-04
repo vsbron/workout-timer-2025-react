@@ -38,25 +38,32 @@ function Settings({ settingsClose }: SettingsProps) {
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         <FormGroup>
-          <FormLabel>Exercise length (in seconds)</FormLabel>
+          <FormLabel note={`Maximum 600 seconds`}>
+            Exercise length (in seconds)
+          </FormLabel>
           <FormInput
-            onChange={(e) => setNewExerciseLength(Number(e.target.value))}
+            onChange={setNewExerciseLength}
+            limit={600}
             value={newExerciseLength}
           />
         </FormGroup>
         <FormGroup>
-          <FormLabel>Break length (in seconds)</FormLabel>
+          <FormLabel note={`Maximum 240 seconds`}>
+            Break length (in seconds)
+          </FormLabel>
           <FormInput
-            onChange={(e) => setNewBreakLength(Number(e.target.value))}
+            onChange={setNewBreakLength}
+            limit={240}
             value={newBreakLength}
           />
         </FormGroup>
         <FormGroup>
-          <FormLabel>Number of rounds</FormLabel>
+          <FormLabel note={`Maximum 5 rounds`}>Number of rounds</FormLabel>
           <FormInput
-            onChange={(e) => setNewRoundsNum(Number(e.target.value))}
+            onChange={setNewRoundsNum}
+            limit={5}
             value={newRoundsNum}
           />
         </FormGroup>

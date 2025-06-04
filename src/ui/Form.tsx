@@ -1,19 +1,28 @@
-import type { ReactNode } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
 
 // Input props type
 type FormInputProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: Dispatch<SetStateAction<number>>;
+  limit: number;
   value: number;
 };
 
 // Input component
-export function FormInput({ onChange, value }: FormInputProps) {
+export function FormInput({ onChange, limit, value }: FormInputProps) {
   // Returned JSX
   return (
     <input
+      inputMode="numeric"
+      pattern="[0-9]*"
       type="text"
       className="border-1 rounded-sm pt-1 pb-0.75 px-4 max-w-21"
-      onChange={onChange}
+      onChange={(e) => {
+        const val = e.target.value;
+        if (/^\d*$/.test(val)) {
+          const num = Number(val);
+          if (num <= limit) onChange(num);
+        }
+      }}
       value={value}
     />
   );
@@ -30,7 +39,18 @@ export function FormGroup({ children }: { children: ReactNode }) {
 }
 
 // Label for the input
-export function FormLabel({ children }: { children: ReactNode }) {
+export function FormLabel({
+  children,
+  note,
+}: {
+  children: ReactNode;
+  note: string;
+}) {
   // Returned JSX
-  return <label className="text-2xl">{children}</label>;
+  return (
+    <label className="text-2xl flex flex-col gap-0.5">
+      {children}
+      <span className="text-[1.3rem]">{note}</span>
+    </label>
+  );
 }
