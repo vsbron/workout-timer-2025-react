@@ -48,7 +48,7 @@ function Settings({ settingsClose }: SettingsProps) {
       <form onSubmit={(e) => submitSettings(e)} className="flex flex-col gap-8">
         <div className="flex flex-col gap-5">
           <FormGroup>
-            <FormLabel note={`Maximum ${MAX_EXERCISE_LENGTH}} seconds`}>
+            <FormLabel note={`Maximum ${MAX_EXERCISE_LENGTH} seconds`}>
               Exercise length
             </FormLabel>
             <FormInput

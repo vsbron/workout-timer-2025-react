@@ -11,6 +11,7 @@ function Timer() {
     currentPhase,
     isPaused,
     currentTime,
+    currentRound,
   } = useTimerContext();
 
   // Separating current time to minutes and seconds
@@ -29,7 +30,8 @@ function Timer() {
           Current status:{" "}
           <b>
             {currentPhase}
-            {currentPhase !== "Idle" && isPaused ? " (Paused)" : ""}
+            {currentPhase !== "Idle" &&
+              ` - Round ${currentRound} ${isPaused ? " (Paused)" : ""}`}
           </b>
         </div>
         <div className="text-[17rem] leading-[1] font-bold tracking-wider px-30 pt-1.5 pb-7 border border-stone-950 inline-block mb-2">
