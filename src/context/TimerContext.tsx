@@ -62,34 +62,39 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const [currentRound, setCurrentRound] = useState<number>(STARTING_ROUND);
   const [isPaused, setIsPaused] = useState<boolean>(INITIAL_PAUSED);
 
+  // Creating a ref for the interval
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // UseEffect that handles the countdown
   useEffect(() => {
+    // If we have not reach zero and not paused, reduce current time by second every second
     if (!isPaused && currentTime > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentTime((time) => time - 1);
       }, 1000);
     }
 
+    // If we hit 0 and not on pause
     if (currentTime === 0 && !isPaused) {
       // Timer reached zero, switch phase
       clearInterval(intervalRef.current!);
 
-      if (currentPhase === "Exercise") {
+      // If we're on Exercise and not on last round
+      if (currentPhase === "Exercise" && currentRound < roundsNum) {
+        // Change to Break, reinitialize current time with break length
         setCurrentPhase("Break");
         setCurrentTime(breakLength);
+
+        // Else, if we're on the break
       } else if (currentPhase === "Break") {
-        if (currentRound < roundsNum) {
-          setCurrentRound((r) => r + 1);
-          setCurrentPhase("Exercise");
-          setCurrentTime(exerciseLength);
-        } else {
-          // Finished all rounds
-          setCurrentPhase("Idle");
-          setIsPaused(true);
-          setCurrentTime(0);
-          setCurrentRound(1);
-        }
+        // Advance the round, change the phase, reinitialize current time
+        setCurrentRound((r) => r + 1);
+        setCurrentPhase("Exercise");
+        setCurrentTime(exerciseLength);
+
+        // If we reached the end, stop the timer
+      } else {
+        stopTimer();
       }
     }
 
