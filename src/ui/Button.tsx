@@ -8,6 +8,7 @@ type ButtonProps = {
   size?: ButtonSize;
   onClick?: () => void;
   disabled?: boolean;
+  type?: "submit" | "reset" | "button" | undefined;
 };
 
 function Button({
@@ -15,6 +16,7 @@ function Button({
   size = "default",
   onClick,
   disabled,
+  type,
 }: ButtonProps) {
   // Returned JSX
   return (
@@ -30,6 +32,7 @@ function Button({
               }`
         }`}
       onClick={onClick}
+      type={type}
       disabled={disabled}
     >
       {children}

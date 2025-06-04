@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 import { useTimerContext } from "@/context/TimerContext";
 
@@ -17,7 +17,7 @@ function Settings({ settingsClose }: SettingsProps) {
     setExerciseLength,
     setBreakLength,
     setRoundsNum,
-    resetTimer,
+    stopTimer,
   } = useTimerContext();
 
   // Setting the states for the settings inputs
@@ -27,55 +27,55 @@ function Settings({ settingsClose }: SettingsProps) {
   const [newRoundsNum, setNewRoundsNum] = useState<number>(roundsNum);
 
   // Submit handler
-  const submitSettings = () => {
+  const submitSettings = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setExerciseLength(newExerciseLength);
     setBreakLength(newBreakLength);
     setRoundsNum(newRoundsNum);
-    resetTimer();
+    stopTimer();
+    settingsClose();
   };
 
   // Returned JSX
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
-      <div className="flex flex-col gap-5">
-        <FormGroup>
-          <FormLabel note={`Maximum 600 seconds`}>
-            Exercise length (in seconds)
-          </FormLabel>
-          <FormInput
-            onChange={setNewExerciseLength}
-            limit={600}
-            value={newExerciseLength}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel note={`Maximum 240 seconds`}>
-            Break length (in seconds)
-          </FormLabel>
-          <FormInput
-            onChange={setNewBreakLength}
-            limit={240}
-            value={newBreakLength}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel note={`Maximum 5 rounds`}>Number of rounds</FormLabel>
-          <FormInput
-            onChange={setNewRoundsNum}
-            limit={5}
-            value={newRoundsNum}
-          />
-        </FormGroup>
-      </div>
-      <div className="flex gap-6 justify-center">
-        <Button size="small" onClick={settingsClose}>
-          Close
-        </Button>
-        <Button size="small" onClick={submitSettings}>
-          Save & Reset
-        </Button>
-      </div>
+      <form onSubmit={(e) => submitSettings(e)} className="flex flex-col gap-8">
+        <div className="flex flex-col gap-5">
+          <FormGroup>
+            <FormLabel note={`Maximum 600 seconds`}>Exercise length</FormLabel>
+            <FormInput
+              onChange={setNewExerciseLength}
+              limit={600}
+              value={newExerciseLength}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel note={`Maximum 240 seconds`}>Break length</FormLabel>
+            <FormInput
+              onChange={setNewBreakLength}
+              limit={240}
+              value={newBreakLength}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel note={`Maximum 5 rounds`}>Number of rounds</FormLabel>
+            <FormInput
+              onChange={setNewRoundsNum}
+              limit={5}
+              value={newRoundsNum}
+            />
+          </FormGroup>
+        </div>
+        <div className="flex gap-6 justify-center">
+          <Button size="small" type="button" onClick={settingsClose}>
+            Close
+          </Button>
+          <Button size="small" type="submit" onClick={submitSettings}>
+            Save & Reset
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

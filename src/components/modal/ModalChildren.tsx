@@ -10,7 +10,7 @@ export function Content({ children }: { children: ReactNode }) {
   // Returned JSX
   return (
     isOpen && (
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto max-w-[30rem] bg-stone-50 p-[2rem] rounded-xl z-50">
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto max-w-[27rem] bg-stone-50 p-[2rem] rounded-xl z-50">
         {children}
       </div>
     )
