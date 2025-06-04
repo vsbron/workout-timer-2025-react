@@ -71,7 +71,7 @@ function Settings({ settingsClose }: SettingsProps) {
           <Button size="small" type="button" onClick={settingsClose}>
             Close
           </Button>
-          <Button size="small" type="submit" onClick={submitSettings}>
+          <Button size="small" type="submit">
             Save & Reset
           </Button>
         </div>
