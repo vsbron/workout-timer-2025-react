@@ -22,7 +22,7 @@ function App() {
 
   // Returned JSX
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100dvh]">
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-[100svh]">
       <Header />
       <Main>
         <TimerProvider>
