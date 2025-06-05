@@ -29,9 +29,13 @@ function Timer() {
         <div className="mb-2">
           Current status:{" "}
           <b>
-            {currentPhase}
-            {currentPhase !== "Idle" &&
-              ` - Round ${currentRound} ${isPaused ? " (Paused)" : ""}`}
+            {currentPhase === "Break" && currentRound === 1
+              ? "Get ready"
+              : `${currentPhase} ${
+                  currentPhase !== "Idle"
+                    ? `- Round ${currentRound} ${isPaused ? " (Paused)" : ""}`
+                    : ""
+                }`}
           </b>
         </div>
         <div className="text-[17rem] leading-[1] font-bold tracking-wider px-30 pt-1.5 pb-7 border border-stone-950 inline-block mb-2">
