@@ -10,7 +10,7 @@ type ContainerProps = {
 function Container({ children, className }: ContainerProps) {
   // Returned JSX
   return (
-    <div className={`max-w-[120rem] px-12 mx-auto ${className}`}>
+    <div className={`max-w-[120rem] px-6 sm:px-12 mx-auto ${className}`}>
       {children}
     </div>
   );

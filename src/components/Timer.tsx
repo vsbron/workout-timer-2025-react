@@ -26,7 +26,7 @@ function Timer() {
   return (
     <section className="mb-6">
       <Container className="text-center">
-        <div className="mb-2">
+        <div className="mb-2 max-sm:text-2xl">
           Current status:{" "}
           <b>
             {currentPhase}
@@ -36,10 +36,10 @@ function Timer() {
             {currentPhase !== "Idle" && isPaused ? " (Paused)" : ""}
           </b>
         </div>
-        <div className="text-[17rem] leading-[1] font-bold tracking-wider px-30 pt-1.5 pb-7 border border-stone-950 inline-block mb-2">
+        <div className="text-[8rem] sm:text-[12rem] md:text-[17rem] leading-[1] font-bold tracking-wider px-8 sm:px-15 md:px-30 pt-1.5 pb-5 md:pb-7 border border-stone-950 inline-block mb-2">
           {currentMins}:{currentSecs}
         </div>
-        <div className="flex gap-8 justify-center text-2xl">
+        <div className="flex max-sm:flex-col gap-1 sm:gap-8 justify-center text-2xl max-sm:mt-2">
           <div>
             Exercise: <b>{exerciseLength} seconds</b>
           </div>
