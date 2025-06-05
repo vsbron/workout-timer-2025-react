@@ -20,7 +20,7 @@ import {
 } from "react";
 
 // Types of available phases
-type phases = "Idle" | "Exercise" | "Break";
+type phases = "Idle" | "Exercise" | "Break" | "Get Ready";
 
 interface ITimerRuntime {
   currentPhase: phases;
@@ -81,7 +81,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       clearInterval(intervalRef.current!);
 
       // If we're on break when timer reaches zero
-      if (currentPhase === "Break") {
+      if (currentPhase === "Break" || currentPhase === "Get Ready") {
         // Change the phase, reinitialize current time
         setCurrentPhase("Exercise");
         setCurrentTime(exerciseLength);
@@ -115,7 +115,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   const startTimer = () => {
     if (currentPhase === "Idle") {
-      setCurrentPhase("Break");
+      setCurrentPhase("Get Ready");
       setCurrentTime(GET_READY_TIME);
     }
     setIsPaused(false);
