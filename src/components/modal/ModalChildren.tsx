@@ -26,7 +26,7 @@ export function Overlay() {
   return (
     isOpen && (
       <div
-        className="absolute top-0 left-0 w-full h-full bg-stone-950/50"
+        className="fixed inset-0 bg-stone-950/50"
         onClick={toggleModal}
       ></div>
     )
