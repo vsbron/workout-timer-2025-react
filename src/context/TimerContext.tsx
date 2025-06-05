@@ -79,25 +79,26 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       // Timer reached zero, switch phase
       clearInterval(intervalRef.current!);
 
-      // If we're on Exercise and not on last round
-      if (currentPhase === "Exercise" && currentRound < roundsNum) {
-        // Change to Break, reinitialize current time with break length
-        setCurrentPhase("Break");
-        setCurrentTime(breakLength);
-
-        // Else, if we're on the break
-      } else if (currentPhase === "Break") {
-        // Advance the round, change the phase, reinitialize current time
-        setCurrentRound((r) => r + 1);
+      // If we're on break when timer reaches zero
+      if (currentPhase === "Break") {
+        // Change the phase, reinitialize current time
         setCurrentPhase("Exercise");
         setCurrentTime(exerciseLength);
+      }
 
-        // If we reached the end, stop the timer
+      // If we're on Exercise and not on last round
+      else if (currentPhase === "Exercise" && currentRound < roundsNum) {
+        // Advance the round, change to Break, reinitialize current time with break length
+        setCurrentRound((r) => r + 1);
+        setCurrentPhase("Break");
+        setCurrentTime(breakLength);
       } else {
+        // Otherwise stop the timer
         stopTimer();
       }
     }
 
+    // Cleanup function that clears the interval on each re-render
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
@@ -113,8 +114,8 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   const startTimer = () => {
     if (currentPhase === "Idle") {
-      setCurrentPhase("Exercise");
-      setCurrentTime(exerciseLength);
+      setCurrentPhase("Break");
+      setCurrentTime(breakLength);
     }
     setIsPaused(false);
   };
