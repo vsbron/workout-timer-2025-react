@@ -1,4 +1,5 @@
 import {
+  GET_READY_TIME,
   INITIAL_BREAK,
   INITIAL_EXERCISE,
   INITIAL_PAUSED,
@@ -115,7 +116,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const startTimer = () => {
     if (currentPhase === "Idle") {
       setCurrentPhase("Break");
-      setCurrentTime(breakLength);
+      setCurrentTime(GET_READY_TIME);
     }
     setIsPaused(false);
   };
