@@ -24,7 +24,7 @@ function Timer() {
 
   // Returned JSX
   return (
-    <section className="mb-6">
+    <section className="mb-4 sm:mb-6">
       <Container className="text-center text-stone-950 dark:text-stone-50">
         <div className="mb-2 max-sm:text-2xl">
           Current status:{" "}

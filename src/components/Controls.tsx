@@ -17,7 +17,7 @@ function Controls() {
   return (
     <section>
       <Container>
-        <div className="flex justify-center gap-10">
+        <div className="flex justify-center gap-8 sm:gap-10">
           <Button onClick={resetTimer}>Reset</Button>
           <Modal.Trigger>
             <Button>Settings</Button>

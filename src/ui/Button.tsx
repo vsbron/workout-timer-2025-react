@@ -24,11 +24,11 @@ function Button({
       className={`bg-stone-200 dark:bg-purple-600 text-stone-950 dark:text-stone-50 fill-purple-700 dark:fill-stone-50 font-medium uppercase cursor-pointer border-stone-950 dark:border-purple-900 active:border-b-1 rounded-md
         ${
           size === "big"
-            ? "px-10 py-5 border-b-3 text-[2rem]"
+            ? "px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 border-b-3 text-[1.6rem] sm:text-[1.8rem] md:text-[2rem]"
             : `border-b-2 ${
                 size === "small"
                   ? "px-4 py-1.5 text-[1.5rem]"
-                  : "px-8 py-3 active:pt-[.85rem] active:pb-[.65rem]"
+                  : "px-4 sm:px-6 md:px-8 py-1.5 sm:py-2 md:py-3 text-[1.6rem] sm:text-[1.8rem] active:pt-[.85rem] active:pb-[.65rem]"
               }`
         }`}
       onClick={onClick}
