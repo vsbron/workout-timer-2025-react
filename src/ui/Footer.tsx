@@ -1,7 +1,7 @@
 function Footer() {
   // Returned JSX
   return (
-    <footer className="text-[1.2rem] p-10 bg-stone-100 text-stone-400">
+    <footer className="text-[1.2rem] p-10 bg-stone-100 dark:bg-stone-900 text-stone-400">
       <div>
         Built by VSBroN as a practice project
         <br />
