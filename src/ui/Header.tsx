@@ -15,7 +15,7 @@ function Header() {
       <Container>
         <img
           src={isDarkTheme ? LogoWhite : Logo}
-          className="max-w-full w-[25rem] sm:w-[35rem] mx-auto"
+          className="max-w-full w-[22rem] sm:w-[28rem]  md:w-[35rem] mx-auto"
           title="Workout Timer"
         />
       </Container>

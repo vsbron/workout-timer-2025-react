@@ -15,7 +15,7 @@ export function FormInput({ onChange, limit, value }: FormInputProps) {
       inputMode="numeric"
       pattern="[0-9]*"
       type="text"
-      className="border-1 border-stone-50 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
+      className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
       onChange={(e) => {
         const val = e.target.value;
         if (/^\d*$/.test(val)) {
