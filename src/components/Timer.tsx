@@ -28,7 +28,7 @@ function Timer() {
       <Container className="text-center">
         <div className="mb-2 max-sm:text-2xl">
           Current status:{" "}
-          <b>
+          <b className="text-indigo-600">
             {currentPhase}
             {currentPhase !== "Idle" &&
               currentPhase !== "Get Ready" &&
