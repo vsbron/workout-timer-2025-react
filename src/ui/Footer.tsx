@@ -5,7 +5,7 @@ function Footer() {
       <div>
         Built by VSBroN as a practice project
         <br />
-        This project is available on GitHub
+        This project is available on <a href="https://github.com/vsbron/workout-timer-2025-react" target="_blank" className="underline hover:text-stone-950 dark:hover:text-stone-50">GitHub</a>
         <br />
         &copy;{new Date().getFullYear()}. All rights reserved
       </div>
