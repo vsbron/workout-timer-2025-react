@@ -21,7 +21,7 @@ function Button({
   // Returned JSX
   return (
     <button
-      className={`bg-stone-300 text-stone-950 fill-stone-950 font-medium uppercase cursor-pointer border-stone-950 active:border-b-1 rounded-md
+      className={`bg-stone-50 text-stone-950 fill-purple-700 font-medium uppercase cursor-pointer border-stone-950 active:border-b-1 rounded-md
         ${
           size === "big"
             ? "px-10 py-5 border-b-3 text-[2rem]"
