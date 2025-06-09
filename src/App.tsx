@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { TimerProvider } from "@/context/TimerContext";
 import { useThemeContext } from "@/context/ThemeContext";
 
-import Header from "@/ui/Header";
-import Main from "@/ui/Main";
-import Footer from "@/ui/Footer";
-import Timer from "@/components/Timer";
 import Controls from "@/components/Controls";
 import Playback from "@/components/Playback";
-import Modal from "./components/modal/ModalParent";
+import Timer from "@/components/Timer";
+import ThemeTrigger from "@/components/ThemeTrigger";
+import Modal from "@/components/modal/ModalParent";
+import Footer from "@/ui/Footer";
+import Header from "@/ui/Header";
+import Main from "@/ui/Main";
 
 function App() {
   // Getting the dark theme state from the context
@@ -32,6 +33,7 @@ function App() {
             <Controls />
           </Modal>
         </TimerProvider>
+        <ThemeTrigger />
       </Main>
       <Footer />
     </div>

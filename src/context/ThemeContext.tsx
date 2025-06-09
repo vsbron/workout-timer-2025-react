@@ -12,7 +12,7 @@ const ThemeContext = createContext<IThemeContext | undefined>(undefined);
 // ThemeProvider component that will wrap the app
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   // Setting the state for the color theme
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   // Toggle color theme handler
   const toggleTheme = () => {

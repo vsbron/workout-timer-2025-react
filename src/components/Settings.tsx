@@ -45,7 +45,10 @@ function Settings({ settingsClose }: SettingsProps) {
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
-      <form onSubmit={(e) => submitSettings(e)} className="flex flex-col gap-10">
+      <form
+        onSubmit={(e) => submitSettings(e)}
+        className="flex flex-col gap-10"
+      >
         <div className="flex flex-col gap-5">
           <FormGroup>
             <FormLabel note={`Maximum ${MAX_EXERCISE_LENGTH} seconds`}>
