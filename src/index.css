@@ -5,9 +5,18 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --animate-logo: logo-appear 0.2s ease forwards;
   --animate-modal: modal-appear 0.5s ease forwards;
   --animate-overlay: overlay-appear 0.2s ease forwards;
 
+  @keyframes logo-appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   @keyframes modal-appear {
     0% {
       opacity: 0;

@@ -12,12 +12,19 @@ function Header() {
   // Returned JSX
   return (
     <header className="text-2xl py-6 sm:py-10 bg-stone-100 dark:bg-stone-900 text-stone-950 shadow transition-colors duration-200">
-      <Container>
+      <Container className="relative">
         <img
-          src={isDarkTheme ? LogoWhite : Logo}
+          src={Logo}
           className="max-w-full w-[22rem] sm:w-[28rem] md:w-[35rem] mx-auto"
           title="Workout Timer"
         />
+        {isDarkTheme && (
+          <img
+            src={LogoWhite}
+            className="max-w-full w-[22rem] sm:w-[28rem] md:w-[35rem] mx-auto opacity-0 absolute top-0 left-0 right-0 animate-logo"
+            title="Workout Timer"
+          />
+        )}
       </Container>
     </header>
   );
