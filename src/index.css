@@ -4,6 +4,30 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --animate-modal: modal-appear 0.3s ease forwards;
+  --animate-overlay: overlay-appear 0.2s ease forwards;
+
+  @keyframes modal-appear {
+    0% {
+      opacity: 0;
+      transform: translateY(-40%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes overlay-appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
 :root {
   --color-white: #fafaf9; /* Stone 50 */
   --color-white-dark: #f5f5f4; /* Stone 100 */
