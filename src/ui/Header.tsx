@@ -11,7 +11,7 @@ function Header() {
 
   // Returned JSX
   return (
-    <header className="text-2xl py-6 sm:py-10 bg-stone-100 dark:bg-stone-900 text-stone-950 shadow">
+    <header className="text-2xl py-6 sm:py-10 bg-stone-100 dark:bg-stone-900 text-stone-950 shadow transition-colors duration-200">
       <Container>
         <img
           src={isDarkTheme ? LogoWhite : Logo}

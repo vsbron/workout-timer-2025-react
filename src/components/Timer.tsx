@@ -25,10 +25,10 @@ function Timer() {
   // Returned JSX
   return (
     <section className="mb-4 sm:mb-6">
-      <Container className="text-center text-stone-950 dark:text-stone-50">
+      <Container className="text-center text-stone-950 dark:text-stone-50 transition-colors duration-200">
         <div className="mb-2 max-sm:text-2xl">
           Current status:{" "}
-          <b className="text-indigo-600 dark:text-purple-400">
+          <b className="text-indigo-600 dark:text-purple-400 transition-colors duration-200">
             {currentPhase}
             {currentPhase !== "Idle" &&
               currentPhase !== "Get Ready" &&
@@ -36,7 +36,7 @@ function Timer() {
             {currentPhase !== "Idle" && isPaused ? " (Paused)" : ""}
           </b>
         </div>
-        <div className="text-[8rem] sm:text-[12rem] md:text-[17rem] leading-[1] font-bold tracking-wider px-8 sm:px-15 md:px-30 pt-1.5 pb-5 md:pb-7 border border-stone-950 dark:border-stone-700 inline-block mb-2 dark:bg-stone-800/50">
+        <div className="text-[8rem] sm:text-[12rem] md:text-[17rem] leading-[1] font-bold tracking-wider px-8 sm:px-15 md:px-30 pt-1.5 pb-5 md:pb-7 border border-stone-950 dark:border-stone-700 inline-block mb-2 bg-stone-100 dark:bg-stone-800/50 transition-colors duration-200">
           {currentMins}:{currentSecs}
         </div>
         <div className="flex max-sm:flex-col gap-1 sm:gap-8 justify-center text-2xl max-sm:mt-2">
