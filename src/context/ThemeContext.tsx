@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
 // Interface for the context
 interface IThemeContext {
@@ -11,10 +17,17 @@ const ThemeContext = createContext<IThemeContext | undefined>(undefined);
 
 // ThemeProvider component that will wrap the app
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  // Setting the state for the color theme (auto detected based on system settings)
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  // Setting the state for the color theme (auto detected based on system settings and looking for data in the local storage)
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
+    const saved = localStorage.getItem("workout-timer-theme");
+    if (saved !== null) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
+  // Persist theme to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("workout-timer-theme", isDarkTheme ? "dark" : "light");
+  }, [isDarkTheme]);
 
   // Toggle color theme handler
   const toggleTheme = () => {
