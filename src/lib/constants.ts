@@ -11,4 +11,4 @@ export const GET_READY_TIME = 5;
 
 export const MAX_EXERCISE_LENGTH = 600;
 export const MAX_BREAK_LENGTH = 240;
-export const MAX_ROUNDS = 5;
+export const MAX_ROUNDS = 10;
