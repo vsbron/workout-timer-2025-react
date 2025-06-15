@@ -1,24 +1,25 @@
 # Workout Timer
 
-A simple workout timer app with adjustable exercise and break intervals, sound notifications, and user controls to start, pause, stop, and reset the timer.
+A simple, customizable workout timer app with sound notifications, theme switching, and adjustable settings - perfect for interval training.
 
 ## Features
 
-- Adjustable exercise and break lengths
-- Countdown timer with start, pause, stop functionality
-- Sound effects for timer actions (start, pause, stop)
-- Reset timer to default values
-- Context API for state management
-- Responsive design ready for any device
+- 🕒 Adjustable exercise time, break time, and number of rounds
+- 🔁 Start, pause, stop, and reset the timer anytime
+- 🎵 Sound effects on start, pause, and stop
+- 🎨 Dark/light theme toggle with:
+- - Auto-detection from system preferences
+- - Persistent theme using localStorage
+- ⚙️ Settings menu for easy customization
+- 📱 Fully responsive down to 360px
 
 ## Technical Details
 
-- Built with React and TypeScript
-- State management via Context API
-- Sound playback using HTML5 Audio
-- Modular components: Timer, Controls, Options
-- Assets managed in `src/assets` folder
-- Easy to extend with new features or styles
+- Built with React + TypeScript
+- Context API for global state management
+- Audio handled with native HTML5 Audio API
+- Clean component structure (Timer, Controls, Settings, Theme)
+- Easily extendable and maintainable codebase
 
 ## Live Version
 
