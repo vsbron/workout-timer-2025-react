@@ -10,6 +10,8 @@ import {
   MAX_EXERCISE_LENGTH,
   MAX_ROUNDS,
 } from "@/lib/constants";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Zod schema for data validation
 export const settingsFormSchema = z.object({
@@ -33,6 +35,9 @@ export const settingsFormSchema = z.object({
     .max(MAX_ROUNDS, `Can't have more than ${MAX_ROUNDS} rounds`),
 });
 
+// Form schema assignment
+type FormData = z.infer<typeof settingsFormSchema>;
+
 // Component prop types
 type SettingsProps = { settingsClose: () => void };
 
@@ -47,6 +52,15 @@ function Settings({ settingsClose }: SettingsProps) {
     setRoundsNum,
     stopTimer,
   } = useTimerContext();
+
+  // Getting necessary form functions from React Hook Form hook
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(settingsFormSchema),
+  });
 
   // Setting the states for the settings inputs
   const [newExerciseLength, setNewExerciseLength] =
