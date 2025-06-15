@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { z } from "zod";
 
 import { useTimerContext } from "@/context/TimerContext";
 
@@ -9,6 +10,28 @@ import {
   MAX_EXERCISE_LENGTH,
   MAX_ROUNDS,
 } from "@/lib/constants";
+
+// Zod schema for data validation
+export const settingsFormSchema = z.object({
+  exercise: z
+    .number()
+    .min(1, "Exercise length should be at least 1 second")
+    .max(
+      MAX_EXERCISE_LENGTH,
+      `Exercise can't be longer than ${MAX_EXERCISE_LENGTH} seconds`
+    ),
+  break: z
+    .number()
+    .min(1, "Break length should be at least 1 second")
+    .max(
+      MAX_BREAK_LENGTH,
+      `Break can't be longer than ${MAX_BREAK_LENGTH} seconds`
+    ),
+  rounds: z
+    .number()
+    .min(1, "Need at least 1 round")
+    .max(MAX_ROUNDS, `Can't have more than ${MAX_ROUNDS} rounds`),
+});
 
 // Component prop types
 type SettingsProps = { settingsClose: () => void };
