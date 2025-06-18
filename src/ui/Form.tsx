@@ -1,15 +1,11 @@
 import type { ReactNode } from "react";
-import type { useForm } from "react-hook-form";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 // Input props type
 type FormInputProps = {
   id: string;
   defaultValue: number;
-  registerValue: ReturnType<typeof useForm>["register"] extends (
-    ...args: any
-  ) => infer R
-    ? R
-    : never;
+  registerValue: UseFormRegisterReturn;
 };
 
 // Input component
