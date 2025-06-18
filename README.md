@@ -20,6 +20,7 @@ A simple, customizable workout timer app with sound notifications, theme switchi
 - Audio handled with native HTML5 Audio API
 - Clean component structure (Timer, Controls, Settings, Theme)
 - Easily extendable and maintainable codebase
+- Settings form validation and management powered by Zod and React Hook Form
 
 ## Live Version
 
