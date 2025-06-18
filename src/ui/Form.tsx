@@ -38,7 +38,7 @@ export function FormLabel({
   return (
     <label htmlFor={htmlFor} className="text-2xl flex flex-col gap-0.5">
       {children}
-      <span className="text-[1.3rem]">{note}</span>
+      <span className="text-[1.4rem]">{note}</span>
     </label>
   );
 }
@@ -48,7 +48,11 @@ export function FormLabel({
 // Label for the input
 export function FormError({ children }: { children: ReactNode }) {
   // Returned JSX
-  return <p className="text-red-500 text-lg">{children}</p>;
+  return (
+    <p className="text-purple-800 dark:text-purple-300 text-xl font-semibold">
+      {children}
+    </p>
+  );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -56,7 +60,7 @@ export function FormError({ children }: { children: ReactNode }) {
 // Wrapper div for for group elements
 export function FormGroup({ children }: { children: ReactNode }) {
   // Returned JSX
-  return <div className="flex flex-col gap-.5">{children}</div>;
+  return <div className="flex flex-col gap-1.5">{children}</div>;
 }
 
 // Wrapper div for input elements
