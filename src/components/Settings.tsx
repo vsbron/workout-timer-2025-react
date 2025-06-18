@@ -1,36 +1,34 @@
-import { useState, type FormEvent } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useTimerContext } from "@/context/TimerContext";
-
-import Button from "@/ui/Button";
-import { FormGroup, FormInput, FormLabel } from "@/ui/Form";
 import {
   MAX_BREAK_LENGTH,
   MAX_EXERCISE_LENGTH,
   MAX_ROUNDS,
 } from "@/lib/constants";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import Button from "@/ui/Button";
 
 // Zod schema for data validation
 export const settingsFormSchema = z.object({
-  exercise: z
-    .number()
+  exercise: z.coerce
+    .number({ invalid_type_error: "Please enter a number" })
     .min(1, "Exercise length should be at least 1 second")
     .max(
       MAX_EXERCISE_LENGTH,
       `Exercise can't be longer than ${MAX_EXERCISE_LENGTH} seconds`
     ),
-  break: z
-    .number()
+  break: z.coerce
+    .number({ invalid_type_error: "Please enter a number" })
     .min(1, "Break length should be at least 1 second")
     .max(
       MAX_BREAK_LENGTH,
       `Break can't be longer than ${MAX_BREAK_LENGTH} seconds`
     ),
-  rounds: z
-    .number()
+  rounds: z.coerce
+    .number({ invalid_type_error: "Please enter a number" })
     .min(1, "Need at least 1 round")
     .max(MAX_ROUNDS, `Can't have more than ${MAX_ROUNDS} rounds`),
 });
@@ -62,18 +60,11 @@ function Settings({ settingsClose }: SettingsProps) {
     resolver: zodResolver(settingsFormSchema),
   });
 
-  // Setting the states for the settings inputs
-  const [newExerciseLength, setNewExerciseLength] =
-    useState<number>(exerciseLength);
-  const [newBreakLength, setNewBreakLength] = useState<number>(breakLength);
-  const [newRoundsNum, setNewRoundsNum] = useState<number>(roundsNum);
-
   // Submit handler
-  const submitSettings = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setExerciseLength(newExerciseLength);
-    setBreakLength(newBreakLength);
-    setRoundsNum(newRoundsNum);
+  const onSubmit = (data: FormData) => {
+    setExerciseLength(data.exercise);
+    setBreakLength(data.break);
+    setRoundsNum(data.rounds);
     stopTimer();
     settingsClose();
   };
@@ -82,41 +73,89 @@ function Settings({ settingsClose }: SettingsProps) {
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
-      <form
-        onSubmit={(e) => submitSettings(e)}
-        className="flex flex-col gap-10"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
         <div className="flex flex-col gap-5">
-          <FormGroup>
-            <FormLabel note={`Maximum ${MAX_EXERCISE_LENGTH} seconds`}>
-              Exercise length
-            </FormLabel>
-            <FormInput
-              onChange={setNewExerciseLength}
-              limit={MAX_EXERCISE_LENGTH}
-              value={newExerciseLength}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel note={`Maximum ${MAX_BREAK_LENGTH} seconds`}>
-              Break length
-            </FormLabel>
-            <FormInput
-              onChange={setNewBreakLength}
-              limit={MAX_BREAK_LENGTH}
-              value={newBreakLength}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel note={`Maximum ${MAX_ROUNDS} rounds`}>
-              Number of rounds
-            </FormLabel>
-            <FormInput
-              onChange={setNewRoundsNum}
-              limit={MAX_ROUNDS}
-              value={newRoundsNum}
-            />
-          </FormGroup>
+          <div>
+            <div>
+              <div className="flex items-center justify-between gap-1">
+                <label
+                  htmlFor="exercise"
+                  className="text-2xl flex flex-col gap-0.5"
+                >
+                  Exercise length
+                  <span className="text-[1.3rem]">
+                    Maximum {MAX_EXERCISE_LENGTH} seconds
+                  </span>
+                </label>
+                <input
+                  id="exercise"
+                  type="text"
+                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
+                  defaultValue={exerciseLength}
+                  {...register("exercise")}
+                />
+              </div>
+              {errors.exercise && (
+                <p className="text-red-500 text-lg mt-1">
+                  {errors.exercise.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <div>
+            <div>
+              <div className="flex items-center justify-between gap-1">
+                <label
+                  htmlFor="break"
+                  className="text-2xl flex flex-col gap-0.5"
+                >
+                  Break length
+                  <span className="text-[1.3rem]">
+                    Maximum {MAX_BREAK_LENGTH} seconds
+                  </span>
+                </label>
+                <input
+                  id="break"
+                  type="text"
+                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
+                  defaultValue={breakLength}
+                  {...register("break")}
+                />
+              </div>
+              {errors.break && (
+                <p className="text-red-500 text-lg mt-1">
+                  {errors.break.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <div>
+            <div>
+              <div className="flex items-center justify-between gap-1">
+                <label
+                  htmlFor="rounds"
+                  className="text-2xl flex flex-col gap-0.5"
+                >
+                  Number of rounds
+                  <span className="text-[1.3rem]">
+                    Maximum {MAX_ROUNDS} rounds
+                  </span>
+                </label>
+                <input
+                  id="rounds"
+                  type="text"
+                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
+                  defaultValue={roundsNum}
+                  {...register("rounds")}
+                />
+              </div>
+              {errors.rounds && (
+                <p className="text-red-500 text-lg mt-1">
+                  {errors.rounds.message}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex gap-6 justify-center">
           <Button size="small" type="button" onClick={settingsClose}>
