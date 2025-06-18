@@ -10,6 +10,13 @@ import {
 } from "@/lib/constants";
 
 import Button from "@/ui/Button";
+import {
+  FormError,
+  FormGroup,
+  FormInput,
+  FormLabel,
+  InputGroup,
+} from "@/ui/Form";
 
 // Zod schema for data validation
 export const settingsFormSchema = z.object({
@@ -75,87 +82,53 @@ function Settings({ settingsClose }: SettingsProps) {
       <h2 className="text-center font-semibold text-4xl">Timer Settings</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
         <div className="flex flex-col gap-5">
-          <div>
-            <div>
-              <div className="flex items-center justify-between gap-1">
-                <label
-                  htmlFor="exercise"
-                  className="text-2xl flex flex-col gap-0.5"
-                >
-                  Exercise length
-                  <span className="text-[1.3rem]">
-                    Maximum {MAX_EXERCISE_LENGTH} seconds
-                  </span>
-                </label>
-                <input
-                  id="exercise"
-                  type="text"
-                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
-                  defaultValue={exerciseLength}
-                  {...register("exercise")}
-                />
-              </div>
-              {errors.exercise && (
-                <p className="text-red-500 text-lg mt-1">
-                  {errors.exercise.message}
-                </p>
-              )}
-            </div>
-          </div>
-          <div>
-            <div>
-              <div className="flex items-center justify-between gap-1">
-                <label
-                  htmlFor="break"
-                  className="text-2xl flex flex-col gap-0.5"
-                >
-                  Break length
-                  <span className="text-[1.3rem]">
-                    Maximum {MAX_BREAK_LENGTH} seconds
-                  </span>
-                </label>
-                <input
-                  id="break"
-                  type="text"
-                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
-                  defaultValue={breakLength}
-                  {...register("break")}
-                />
-              </div>
-              {errors.break && (
-                <p className="text-red-500 text-lg mt-1">
-                  {errors.break.message}
-                </p>
-              )}
-            </div>
-          </div>
-          <div>
-            <div>
-              <div className="flex items-center justify-between gap-1">
-                <label
-                  htmlFor="rounds"
-                  className="text-2xl flex flex-col gap-0.5"
-                >
-                  Number of rounds
-                  <span className="text-[1.3rem]">
-                    Maximum {MAX_ROUNDS} rounds
-                  </span>
-                </label>
-                <input
-                  id="rounds"
-                  type="text"
-                  className="border-1 text-stone-950 dark:text-stone-50 border-stone-950 dark:border-purple-400 rounded-sm pt-1 pb-1.5 px-4 max-w-21"
-                  defaultValue={roundsNum}
-                  {...register("rounds")}
-                />
-              </div>
-              {errors.rounds && (
-                <p className="text-red-500 text-lg mt-1">
-                  {errors.rounds.message}
-                </p>
-              )}
-            </div>
-          </div>
+          <FormGroup>
+            <InputGroup>
+              <FormLabel
+                htmlFor="exercise"
+                note={`Maximum ${MAX_EXERCISE_LENGTH} seconds`}
+              >
+                Exercise length
+              </FormLabel>
+              <FormInput
+                id="exercise"
+                defaultValue={exerciseLength}
+                registerValue={register("exercise")}
+              />
+            </InputGroup>
+            {errors.exercise && (
+              <FormError>{errors.exercise.message}</FormError>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <FormLabel
+                htmlFor="break"
+                note={`Maximum ${MAX_BREAK_LENGTH} seconds`}
+              >
+                Break length
+              </FormLabel>
+              <FormInput
+                id="break"
+                defaultValue={breakLength}
+                registerValue={register("break")}
+              />
+            </InputGroup>
+            {errors.break && <FormError>{errors.break.message}</FormError>}
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <FormLabel htmlFor="rounds" note={`Maximum ${MAX_ROUNDS} rounds`}>
+                Number of rounds
+              </FormLabel>
+              <FormInput
+                id="rounds"
+                defaultValue={roundsNum}
+                registerValue={register("rounds")}
+              />
+            </InputGroup>
+            {errors.rounds && <FormError>{errors.rounds.message}</FormError>}
+          </FormGroup>
         </div>
         <div className="flex gap-6 justify-center">
           <Button size="small" type="button" onClick={settingsClose}>
