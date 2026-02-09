@@ -21,7 +21,7 @@ function Header() {
         {isDarkTheme && (
           <img
             src={LogoWhite}
-            className="max-w-full w-[22rem] sm:w-[28rem] md:w-[35rem] mx-auto opacity-0 absolute top-0 left-0 right-0 animate-logo"
+            className="max-w-full w-[20rem] sm:w-[26rem] md:w-[32rem] mx-auto opacity-0 absolute top-0 left-0 right-0 animate-logo"
             title="Workout Timer"
           />
         )}
