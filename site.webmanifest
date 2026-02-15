@@ -1,6 +1,6 @@
 {
   "name": "Workout Timer",
-  "short_name": "Small project that I made for helping me during small workout exercises I do",
+  "short_name": "A simple React workout timer for intervals, rounds, and rest periods. Clean UI, mobile-friendly, fast and lightweight.",
   "icons": [
     {
       "src": "/favicons/android-chrome-192x192.png",

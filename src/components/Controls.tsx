@@ -18,9 +18,11 @@ function Controls() {
     <section>
       <Container>
         <div className="flex justify-center gap-8 sm:gap-10">
-          <Button onClick={resetTimer}>Reset</Button>
+          <Button onClick={resetTimer} ariaLabel="Reset timer">
+            Reset
+          </Button>
           <Modal.Trigger>
-            <Button>Settings</Button>
+            <Button ariaLabel="Settings">Settings</Button>
           </Modal.Trigger>
           <Modal.Overlay />
           <Modal.Content>

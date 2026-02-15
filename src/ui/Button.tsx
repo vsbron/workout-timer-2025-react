@@ -9,14 +9,14 @@ type ButtonProps = {
   onClick?: () => void;
   disabled?: boolean;
   type?: "submit" | "reset" | "button" | undefined;
+  ariaLabel: string;
 };
 
 function Button({
   children,
   size = "default",
-  onClick,
-  disabled,
-  type,
+  ariaLabel,
+  ...rest
 }: ButtonProps) {
   // Returned JSX
   return (
@@ -31,9 +31,8 @@ function Button({
                   : "px-4 sm:px-6 md:px-8 py-1.5 sm:py-2 md:py-3 text-[1.6rem] sm:text-[1.8rem] active:pt-[.50rem] sm:active:pt-[.65rem] md:active:pt-[.85rem] active:pb-[.30rem] sm:active:pb-[.45rem] md:active:pb-[.65rem]"
               }`
         }`}
-      onClick={onClick}
-      type={type}
-      disabled={disabled}
+      aria-label={ariaLabel}
+      {...rest}
     >
       {children}
     </button>

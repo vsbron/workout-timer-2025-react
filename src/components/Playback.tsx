@@ -27,13 +27,17 @@ function Playback() {
     <section>
       <Container>
         <div className="flex justify-center gap-8 sm:gap-10">
-          <Button size="big" onClick={startTimer}>
+          <Button size="big" onClick={startTimer} ariaLabel="Start timer">
             <PlayIcon className="fill-inherit w-12 sm:w-15 h-12 sm:h-15" />
           </Button>
-          <Button size="big" onClick={pauseButtonHandler}>
+          <Button
+            size="big"
+            onClick={pauseButtonHandler}
+            ariaLabel="Pause Timer"
+          >
             <PauseIcon className="fill-inherit w-12 sm:w-15 h-12 sm:h-15" />
           </Button>
-          <Button size="big" onClick={stopTimer}>
+          <Button size="big" onClick={stopTimer} ariaLabel="Stop Timer">
             <StopIcon className="fill-inherit w-12 sm:w-15 h-12 sm:h-15" />
           </Button>
         </div>

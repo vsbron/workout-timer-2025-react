@@ -17,12 +17,16 @@ function Header() {
           src={Logo}
           className="max-w-full w-[20rem] sm:w-[26rem] md:w-[32rem] mx-auto"
           title="Workout Timer"
+          width="320px"
+          height="114px"
         />
         {isDarkTheme && (
           <img
             src={LogoWhite}
             className="max-w-full w-[20rem] sm:w-[26rem] md:w-[32rem] mx-auto opacity-0 absolute top-0 left-0 right-0 animate-logo"
             title="Workout Timer"
+            width="320px"
+            height="114px"
           />
         )}
       </Container>

@@ -25,14 +25,14 @@ export const settingsFormSchema = z.object({
     .min(1, "Exercise length should be at least 1 second")
     .max(
       MAX_EXERCISE_LENGTH,
-      `Exercise can't be longer than ${MAX_EXERCISE_LENGTH} seconds`
+      `Exercise can't be longer than ${MAX_EXERCISE_LENGTH} seconds`,
     ),
   break: z.coerce
     .number({ invalid_type_error: "Please enter a number" })
     .min(1, "Break length should be at least 1 second")
     .max(
       MAX_BREAK_LENGTH,
-      `Break can't be longer than ${MAX_BREAK_LENGTH} seconds`
+      `Break can't be longer than ${MAX_BREAK_LENGTH} seconds`,
     ),
   rounds: z.coerce
     .number({ invalid_type_error: "Please enter a number" })
@@ -131,10 +131,15 @@ function Settings({ settingsClose }: SettingsProps) {
           </FormGroup>
         </div>
         <div className="flex gap-6 justify-center">
-          <Button size="small" type="button" onClick={settingsClose}>
+          <Button
+            size="small"
+            type="button"
+            onClick={settingsClose}
+            ariaLabel="Close settings"
+          >
             Close
           </Button>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" ariaLabel="Save settings">
             Save & Reset
           </Button>
         </div>
