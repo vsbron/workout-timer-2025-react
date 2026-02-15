@@ -21,6 +21,7 @@ A simple, customizable workout timer app with sound notifications, theme switchi
 - Clean component structure (Timer, Controls, Settings, Theme)
 - Easily extendable and maintainable codebase
 - Settings form validation and management powered by Zod and React Hook Form
+- Lighthouse scores: 95+ across all categories (Performance, Accessibility, Best Practices, SEO)
 
 ## License
 
